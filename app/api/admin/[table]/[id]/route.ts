@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { adminSupabase } from '@/lib/supabase';
+import { adminSupabase } from '../../../../../lib/supabase';
 
 function ok(table: string) {
   return ['members','attendance','warnings','tryouts','events','alliances','content_plan'].includes(table);
