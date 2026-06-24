@@ -1,0 +1,8 @@
+create extension if not exists pgcrypto;
+create table if not exists members (id uuid primary key default gen_random_uuid(), real_name text, game_name text, instagram_id text, role text, team text, join_date date default current_date, activity_status text, driving_skill int, game_skill int, teamwork int, behavior int, warnings_count int default 0, promotion_status text, alliance_tag text default 'SYN', notes text, created_at timestamptz default now());
+create table if not exists attendance (id uuid primary key default gen_random_uuid(), member_id text, date date, status text, reason text, points int, created_at timestamptz default now());
+create table if not exists warnings (id uuid primary key default gen_random_uuid(), member_id text, reason text, warning_level int, action text, date date, created_at timestamptz default now());
+create table if not exists tryouts (id uuid primary key default gen_random_uuid(), name text, game_name text, instagram_id text, active_time text, driving_skill text, game_skill text, message text, status text default 'Pending', created_at timestamptz default now());
+create table if not exists events (id uuid primary key default gen_random_uuid(), title text, type text, date date, time text, description text, status text, created_at timestamptz default now());
+create table if not exists alliances (id uuid primary key default gen_random_uuid(), clan_name text, alliance_tag text, leader_instagram text, status text, notes text, created_at timestamptz default now());
+create table if not exists content_plan (id uuid primary key default gen_random_uuid(), title text, type text, date date, status text, notes text, created_at timestamptz default now());
