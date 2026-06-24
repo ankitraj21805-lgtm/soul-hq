@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Shell } from '@/components/shell';
+import { Shell } from '../components/shell';
 
 export default function HomePage() {
   const modules = ['Member CRUD','Daily attendance','Warning tracker','Promotion status','Tryout pipeline','Event manager','Alliance manager','Content planner','Settings'];
