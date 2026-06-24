@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Shell, SectionTitle } from '@/components/shell';
+import { Shell, SectionTitle } from '../../components/shell';
 
 export default function JoinPage() {
   const [msg, setMsg] = useState('');
