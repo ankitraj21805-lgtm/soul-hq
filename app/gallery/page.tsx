@@ -1,4 +1,4 @@
-import { Shell, SectionTitle } from '@/components/shell';
+import { Shell, SectionTitle } from '../../components/shell';
 
 export default function GalleryPage() {
   const items = ['Sports cars','Red neon city','Crown squad','SYN meet','Clan win','Role reveal'];
