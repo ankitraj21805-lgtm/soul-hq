@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Shell, SectionTitle } from '@/components/shell';
-import { members as seedMembers, events as seedEvents, alliances as seedAlliances } from '@/lib/data';
+import { Shell, SectionTitle } from '../../components/shell';
+import { members as seedMembers, events as seedEvents, alliances as seedAlliances } from '../../lib/data';
 
 type Row = Record<string, any>;
 const tables = ['members','attendance','warnings','tryouts','events','alliances','content_plan'];
