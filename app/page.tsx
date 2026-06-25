@@ -1,0 +1,15 @@
+import Link from 'next/link';
+
+const modules = [
+  ['Member Management','Roster, roles, gun level, armor level and activity tracking.'],
+  ['Attendance Tracker','IN, LATE, OUT, NO REPLY with automatic points.'],
+  ['Warning Tracker','Reminder, Role Hold and Remove Review workflow.'],
+  ['Promotion Board','Trial Running, Eligible, Hold, Promoted and Demoted.'],
+  ['Gallery Vault','Members can upload/download images and fighting clips.'],
+  ['Tryout Pipeline','Public requests appear in admin for accept/reject.'],
+  ['Alliance Control','Official SYN rules and allied clan records.'],
+  ['Event Manager','Clan meets, runs, shoots and alliance planning.'],
+  ['Content Planner','Reels, posts, stories and media schedule.']
+];
+function visual(title:string, sub:string){return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='900' height='520'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='#210008'/><stop offset='1' stop-color='#050506'/></linearGradient></defs><rect width='900' height='520' fill='url(#g)'/><circle cx='700' cy='80' r='180' fill='rgba(255,25,60,.2)'/><path d='M0 420 C200 310 360 480 560 350 C700 260 790 310 900 230 L900 520 L0 520Z' fill='rgba(255,255,255,.06)'/><text x='55' y='120' fill='#ff2449' font-size='28' font-family='Arial' font-weight='900' letter-spacing='6'>SOUL HQ</text><text x='55' y='270' fill='white' font-size='58' font-family='Arial' font-weight='900'>${title}</text><text x='55' y='330' fill='#bbb' font-size='25' font-family='Arial'>${sub}</text></svg>`)}`}
+export default function Home(){return <main><section className="hero"><div className="wrap grid grid2"><div><span className="tag">SOUL Syndicate • SYN Alliance</span><h1 className="title">Furnished clan HQ for <span className="red">MadOut 2</span>.</h1><p className="muted">Admin management, member media access, gallery vault, fighting clips, gun/armor level tracking and clean fair-play rules.</p><div className="row" style={{marginTop:24}}><Link className="btn red" href="/gallery">Open Gallery Vault</Link><Link className="btn" href="/member-login">Member Login</Link><Link className="btn" href="/login">Admin Login</Link></div></div><div className="card" style={{padding:0,overflow:'hidden'}}><img src={visual('SOUL MEDIA','Images • Clips • Downloads')} style={{width:'100%',height:360,objectFit:'cover'}} alt="SOUL media"/><div style={{padding:18}}><h2>Respect • Loyalty • Skill</h2><p className="muted">SYN players are official allies and should not be attacked by allied clans.</p></div></div></div></section><section className="section"><div className="wrap"><div className="center"><b className="red">FEATURES</b><h2 className="h2">Fully usable management modules</h2><p className="muted">No empty placeholders — each section is designed for real clan work.</p></div><div className="grid grid3">{modules.map(([title,desc])=><div className="card" key={title}><h3 className="red">{title}</h3><p className="muted">{desc}</p></div>)}</div></div></section></main>}
