@@ -1,0 +1,5 @@
+'use client';
+import { useEffect, useState } from 'react';
+type Row=Record<string,any>;
+const fallback=[{id:'1',title:'SOUL Night Run',type:'Clan Meet',time:'10:00 PM',status:'Planned',description:'Daily activity session'},{id:'2',title:'SYN Alliance Meetup',type:'Alliance',time:'9:30 PM',status:'Planned',description:'Alliance coordination'},{id:'3',title:'Content Shoot',type:'Media',time:'11:00 PM',status:'Draft',description:'Gallery clips and screenshots'}];
+export default function Events(){const [rows,setRows]=useState<Row[]>(fallback);useEffect(()=>{fetch('/api/public/events').then(r=>r.json()).then(d=>{if(Array.isArray(d)&&d.length)setRows(d)}).catch(()=>{})},[]);return <main className="section"><div className="wrap"><div className="center"><b className="red">EVENTS</b><h1 className="h2">Clan Schedule</h1><p className="muted">Meets, alliance sessions and content shoots.</p></div><div className="grid grid3">{rows.map(e=><div className="card" key={e.id}><h3>{e.title}</h3><p>{e.type} • {e.date||''} • {e.time}</p><p className="muted">{e.description}</p><span className="tag">{e.status}</span></div>)}</div></div></main>}
