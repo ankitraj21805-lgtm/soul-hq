@@ -10,7 +10,7 @@ async function ensure(kind:'image'|'clip'){
   const s=sb(); const bucket=buckets[kind];
   const found=await s.storage.getBucket(bucket);
   if(found.error){
-    const created=await s.storage.createBucket(bucket,{ public:true, fileSizeLimit: kind==='clip' ? 5368709120 : 26214400 });
+    const created=await s.storage.createBucket(bucket,{ public:true, fileSizeLimit: 52428800 });
     if(created.error) return { s, bucket, error: created.error.message };
   }
   return { s, bucket, error:'' };
@@ -25,7 +25,7 @@ export async function POST(req:Request){
   const ext=(String(body.fileName||'').split('.').pop() || (kind==='clip'?'mp4':'png')).replace(/[^a-zA-Z0-9]/g,'').slice(0,8);
   const path=`${Date.now()}__${safe(body.uploadedBy)}__${safe(body.title)}.${ext}`;
   const { s, bucket, error:bucketError }=await ensure(kind);
-  if(bucketError) return NextResponse.json({ error:'Storage setup error: '+bucketError }, { status:500 });
+  if(bucketError) return NextResponse.json({ error:'Storage error: '+bucketError }, { status:500 });
   const { data, error }=await s.storage.from(bucket).createSignedUploadUrl(path);
   if(error) return NextResponse.json({ error:error.message }, { status:500 });
   return NextResponse.json({ bucket, path, token:data.token });
