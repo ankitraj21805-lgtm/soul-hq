@@ -19,9 +19,13 @@ export async function POST(req:Request){
     let valid=false; try{ const u=new URL(mediaUrl); valid=u.protocol.startsWith('http'); }catch{}
     if(!valid) return NextResponse.json({ error:'Valid media link paste karo' }, { status:400 });
     const notes=JSON.stringify({ mediaUrl, uploadedBy });
-    const { data, error }=await sb().from('content_plan').insert({ title, type:'media_link', status:'Published', notes }).select().single();
-    if(error) return NextResponse.json({ error:error.message }, { status:500 });
-    return NextResponse.json({ ok:true, data });
+    const payload={ title, type:'media_link', status:'Ready', notes };
+    let result=await sb().from('content_plan').insert(payload).select().single();
+    if(result.error){
+      result=await sb().from('content_plan').insert({ ...payload, status:'Draft' }).select().single();
+    }
+    if(result.error) return NextResponse.json({ error:result.error.message }, { status:500 });
+    return NextResponse.json({ ok:true, data:result.data });
   }
   const form=await req.formData();
   const kind=form.get('kind')==='clip'?'clip':'image';
